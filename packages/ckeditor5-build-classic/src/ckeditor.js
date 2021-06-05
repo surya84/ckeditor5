@@ -30,8 +30,48 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
+import Base64UploadAdapter from './modules/base64uploadAdapter';
+
+import MathType from '@wiris/mathtype-ckeditor5';
 export default class ClassicEditor extends ClassicEditorBase {}
+
+const imageConfiguration = {
+	styles: [
+		'alignLeft', 'alignCenter', 'alignRight'
+	],
+	resizeOptions: [
+		{
+			name: 'imageResize:original',
+			value: null,
+			icon: 'original'
+		},
+		{
+			name: 'imageResize:50',
+			value: '50',
+			icon: 'medium'
+		},
+		{
+			name: 'imageResize:75',
+			value: '75',
+			icon: 'large'
+		}
+	],
+	toolbar: [
+		'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+		'|',
+		'imageResize',
+		'|',
+		'imageTextAlternative',
+		'|',
+		'imageResize:50',
+		'imageResize:75',
+		'imageResize:original',
+	]
+}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
@@ -58,7 +98,12 @@ ClassicEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TextTransformation,
+	ImageResize,
+	Base64UploadAdapter,
+	Alignment,
+	MathType,
+	Font
 ];
 
 // Editor configuration.
@@ -67,6 +112,7 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'heading',
 			'|',
+			'alignment',
 			'bold',
 			'italic',
 			'link',
@@ -81,19 +127,13 @@ ClassicEditor.defaultConfig = {
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
+			'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor',
+			'MathType',
+			'ChemType'
 		]
 	},
-	image: {
-		toolbar: [
-			'imageStyle:inline',
-			'imageStyle:full',
-			'imageStyle:side',
-			'|',
-			'toggleImageCaption',
-			'imageTextAlternative'
-		]
-	},
+	image: imageConfiguration,
 	table: {
 		contentToolbar: [
 			'tableColumn',
