@@ -37,7 +37,8 @@ import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import Base64UploadAdapter from './modules/base64uploadAdapter';
 
 import MathType from '@wiris/mathtype-ckeditor5';
-export default class ClassicEditor extends ClassicEditorBase {}
+
+class ClassicEditor extends ClassicEditorBase { }
 
 const imageConfiguration = {
 	styles: [
@@ -143,4 +144,8 @@ ClassicEditor.defaultConfig = {
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
+};
+
+export default {
+	ClassicEditor
 };
